@@ -194,7 +194,13 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                         label: 'Marktpoint ofset center(#)',
                         ref: 'marktPointOffSetCenter',
                         default: '0'
-                      }
+                      },
+                      marktPointMinData: {
+                        type: 'boolean',
+                        label: 'Show lowest data point',
+                        ref: 'marktPointMinData',
+                        defaultValue: false
+                      },
                     }
                   }
                 }
@@ -280,20 +286,32 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
             if (layout.toolboxLine == true) {
               var lineAct = 'line'
             } else {
-              var lineAct = ''
+              var lineAct
             };
             if (layout.toolboxBar == true) {
               var barAct = 'bar'
             } else {
-              var barAct = ''
+              var barAct
             };
             if (layout.toolboxStacked == true) {
               var stackAct = 'stack'
             } else {
-              var stackAct = ''
+              var stackAct
             };
 
-            
+            var markPointMinData;
+            if (layout.marktPointMinData == true) {
+              markPointMinData = {type : 'max', name: 'Lowest'}
+            }
+
+            // if (layout.marktPointMinData == true) {
+            //   var markPointMinData = "{type : 'max', name: 'Lowest'},"
+            // } else {
+            //   var markPointMinData
+            // };
+
+
+
             var options = {
             tooltip : {
                 trigger: 'axis'
@@ -336,10 +354,7 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                       symbol: layout.marktPointShape,
                       symbolSize: layout.marktPointSize,
                       symbolOffset: [layout.marktPointOffSetCenter, layout.marktPointOffSetHeight],
-                      data : [
-                          {type : 'max', name: 'Lowest'},
-                          {type : 'min', name: 'Highest'}
-                      ]
+                      data: [markPointMinData]
                     },
                     markLine : {
                       data : [
@@ -361,8 +376,8 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                       symbolSize: layout.marktPointSize,
                       symbolOffset: [layout.marktPointOffSetCenter, layout.marktPointOffSetHeight],
                       data : [
-                        {type : 'max', name: 'Lowest'},
-                        {type : 'min', name: 'Highest'}
+                        {type : 'min', name: 'Lowest'},
+                        {type : 'max', name: 'Highest'}
                       ]
                     },
                     markLine : {
@@ -373,7 +388,6 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                 },
             ]
         };
-
       this.$scope.eChart.setOption(options);
     }
   }
