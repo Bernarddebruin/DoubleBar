@@ -276,7 +276,6 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
             }
           }
         });
-        //console.log(cData);
       })
             if (layout.toolboxLine == true) {
               var lineAct = 'line'
@@ -294,16 +293,7 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
               var stackAct = ''
             };
 
-
-            console.log('BLA!');
-            console.log(showMarktline);
-
-            if (layout.showMarktLine == true) {
-              var showMarktline = "markLine:{Data:[{type : 'average'}]}";
-            } else {
-              var showMarktline = '';
-            };
-
+            
             var options = {
             tooltip : {
                 trigger: 'axis'
@@ -351,11 +341,11 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                           {type : 'min', name: 'Highest'}
                       ]
                     },
-                    // markLine : {
-                    //   data : [
-                    //       {type : 'average'}
-                    //   ]
-                    // }
+                    markLine : {
+                      data : [
+                          {type : 'average'}
+                      ]
+                    }
                 },
                 {
                     name: layout.qHyperCube.qMeasureInfo[1].qFallbackTitle,
