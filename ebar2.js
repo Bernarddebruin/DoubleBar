@@ -195,6 +195,12 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                         ref: 'marktPointOffSetCenter',
                         default: '0'
                       }
+                      marktPointMinData: {
+                        type: 'boolean',
+                        label: 'Show lowest data point',
+                        ref: 'marktPointMinData',
+                        defaultValue: false
+                      },
                     }
                   }
                 }
@@ -292,6 +298,13 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
             } else {
               var stackAct = ''
             };
+            if (layout.marktPointMinData == true) {
+              var markPointMinData = "{type : 'max', name: 'Lowest'},";
+            } else {
+              var markPointMinData
+            };
+
+
 
             
             var options = {
@@ -361,7 +374,7 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                       symbolSize: layout.marktPointSize,
                       symbolOffset: [layout.marktPointOffSetCenter, layout.marktPointOffSetHeight],
                       data : [
-                        {type : 'max', name: 'Lowest'},
+                        eval(markPointMinData)
                         {type : 'min', name: 'Highest'}
                       ]
                     },
