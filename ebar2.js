@@ -88,29 +88,15 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                 },
                 toolboxRestore: {
                   type: 'string',
-                  component: 'dropdown',
                   label: 'Toolbox Restore on/off',
                   ref: 'toolboxRestore',
-                  options: [{
-                    value: true,
-                    label: 'On'
-                  },{
-                    value: false,
-                    label: 'Off'
-                  }]
+                  defaultValue: false;
                 },
                 toolboxDataview: {
                   type: 'string',
-                  component: 'dropdown',
                   label: 'Toolbox show Data on/off',
                   ref: 'toolboxDataview',
-                  options: [{
-                    value: true,
-                    label: 'On'
-                  },{
-                    value: false,
-                    label: 'Off'
-                  }]
+                  defaultValue: false;
                 },
               }
             },
@@ -195,12 +181,6 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                         ref: 'marktPointOffSetCenter',
                         default: '0'
                       }
-                      marktPointMinData: {
-                        type: 'boolean',
-                        label: 'Show lowest data point',
-                        ref: 'marktPointMinData',
-                        defaultValue: false
-                      },
                     }
                   }
                 }
@@ -298,15 +278,7 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
             } else {
               var stackAct = ''
             };
-            if (layout.marktPointMinData == true) {
-              var markPointMinData = "{type : 'max', name: 'Lowest'},";
-            } else {
-              var markPointMinData
-            };
 
-
-
-            
             var options = {
             tooltip : {
                 trigger: 'axis'
@@ -374,7 +346,7 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                       symbolSize: layout.marktPointSize,
                       symbolOffset: [layout.marktPointOffSetCenter, layout.marktPointOffSetHeight],
                       data : [
-                        eval(markPointMinData)
+                        {type : 'max', name: 'Lowest'},
                         {type : 'min', name: 'Highest'}
                       ]
                     },
