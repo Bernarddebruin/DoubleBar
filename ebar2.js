@@ -87,13 +87,13 @@ define(["./echarts-en", "qlik"],function(echarts, qlik){
                   defaultValue: false
                 },
                 toolboxRestore: {
-                  type: 'string',
+                  type: 'boolean',
                   label: 'Toolbox Restore on/off',
                   ref: 'toolboxRestore',
                   defaultValue: false
                 },
                 toolboxDataview: {
-                  type: 'string',
+                  type: 'boolean',
                   label: 'Toolbox show Data on/off',
                   ref: 'toolboxDataview',
                   defaultValue: false
